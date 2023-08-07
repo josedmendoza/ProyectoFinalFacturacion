@@ -1,0 +1,38 @@
+package com.proyecto.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.proyecto.entity.Cliente;
+import com.proyecto.repository.ClienteRepository;
+
+public class ClienteService {
+
+	private final ClienteRepository clienteRepository;
+
+	@Autowired
+	public ClienteService(ClienteRepository clienteRepository) {
+		this.clienteRepository = clienteRepository;
+	}
+	
+//	Metodo para crear cliente en la base de dato
+	public Cliente crearCliente(Cliente cliente) {
+		return clienteRepository.save(cliente);
+	}
+	
+//	Metodo para buscar un cliente en la tabla cliente de la base de datos
+	public Cliente bucasClientePorId (long idCliente) {
+		return clienteRepository.findById(idCliente)
+				.orElseThrow(() -> new RuntimeException("Tarea no encontrada con ID: " + idCliente));
+	}
+	
+	public Cliente borrarCliente (long idCliente) {
+		return clienteRepository.deleteById(idCliente);
+	}
+	
+	
+	
+	
+	
+}

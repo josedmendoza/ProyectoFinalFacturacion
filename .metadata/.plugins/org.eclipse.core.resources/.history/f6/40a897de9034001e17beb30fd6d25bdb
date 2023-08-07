@@ -1,0 +1,19 @@
+package com.proyecto.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.proyecto.repository.ClienteRepository;
+
+public class ClienteService {
+
+	private final ClienteRepository clienteRepository;
+
+	@Autowired
+	public ClienteService(ClienteRepository clienteRepository) {
+		this.clienteRepository = clienteRepository;
+	}
+	
+	public int
+	
+	
+}

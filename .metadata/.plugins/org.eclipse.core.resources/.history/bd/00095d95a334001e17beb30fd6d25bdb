@@ -1,0 +1,34 @@
+package com.proyecto.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.proyecto.entity.Pedidos;
+import com.proyecto.repository.PedidosRepository;
+
+public class PedidosService {
+	
+	
+	private final PedidosRepository pedidosRepository;
+
+	@Autowired
+	public PedidosService(PedidosRepository pedidosRepository) {
+		this.pedidosRepository = pedidosRepository;
+	}
+	
+	
+	public Pedidos crearComprobante (Pedidos pedido, long idPedido) {
+		
+		Pedidos crearPedido = pedidosRepository.save(pedido);
+		Pedidos buscarPedido = pedidosRepository.findById(idPedido);
+		buscarPedido.setFecha(buscarPedido.getFecha());
+		buscarPedido.setTotal(buscarPedido.getTotal());
+		buscarPedido.setCliente(buscarPedido.getCliente());
+		buscarPedido.setProductoPedido(buscarPedido.getProductoPedido());
+		return pedidosRepository.save(pedido);
+	}
+	
+	
+	
+	
+
+}

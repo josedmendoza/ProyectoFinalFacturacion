@@ -1,0 +1,20 @@
+package com.proyecto.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.proyecto.repository.ProductoPedidoRepository;
+
+public class ProducoPedidoServicio {
+
+	private final ProductoPedidoRepository productoPedidoRepository;
+
+	@Autowired
+	public ProducoPedidoServicio(ProductoPedidoRepository productoPedidoRepository) {
+		this.productoPedidoRepository = productoPedidoRepository;
+	}
+	
+	
+	
+	
+	
+}
