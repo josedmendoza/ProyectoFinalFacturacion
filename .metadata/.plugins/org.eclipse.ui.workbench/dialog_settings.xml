@@ -14,9 +14,12 @@
 		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
 		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\jose_\Documents\workspace-spring-tool-suite-4-4.19.0.RELEASE\Tienda\FacturacionSegundaEntregaMendoza.zip"/>
 			<item value="C:\Users\jose_\Documents\workspace-spring-tool-suite-4-4.19.0.RELEASE\Tienda\Tienda.zip"/>
 		</list>
 	</section>
 	<section name="FileSystemExportWizard">
+	</section>
+	<section name="NewWizardAction">
 	</section>
 </section>

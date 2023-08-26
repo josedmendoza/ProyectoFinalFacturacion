@@ -1,0 +1,53 @@
+package com.proyecto.tienda.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.proyecto.tienda.entity.Producto;
+import com.proyecto.tienda.repository.ProductoRepository;
+
+@Service
+public class ProductoService {
+
+	private final ProductoRepository productoRepository;
+
+	@Autowired
+	public ProductoService(ProductoRepository productoRepository) {
+		this.productoRepository = productoRepository;
+	}
+	
+	//Metodo para crear un producto
+	public Producto crearProducto (Producto producto) {
+		return productoRepository.save(producto);
+	}
+	
+	//Metodo para actulizar productos
+	public Producto actualizarProducto (long idProducto, Producto producto) {
+	Producto buscarProducto = productoRepository.findById(idProducto).
+			orElseThrow(() -> new RuntimeException("Producto no encontrada con ID: " + idProducto));
+	
+	buscarProducto.setNombre(producto.getNombre());
+	buscarProducto.setDescripcion(producto.getDescripcion());
+	buscarProducto.setPrecio(producto.getPrecio());
+	buscarProducto.setStock(producto.getStock());
+	
+	return productoRepository.save(buscarProducto);
+	}
+	
+	//Metodo para actulizar precios de los productos no vendidos
+		public Producto actualizarPrecioProducto (long idProducto, Producto producto) {
+		Producto buscarProducto = productoRepository.findById(idProducto).
+				orElseThrow(() -> new RuntimeException("Producto no encontrada con ID: " + idProducto));
+		
+		if(buscarProducto.getStock() != 0)
+		buscarProducto.setPrecio(producto.getPrecio());
+		return productoRepository.save(buscarProducto);
+		}
+		
+		//Metrodo para obtener producto
+		public Optional<Producto> obtenerProducto (long idProducto) {
+		return productoRepository.findById(idProducto);
+		}
+}

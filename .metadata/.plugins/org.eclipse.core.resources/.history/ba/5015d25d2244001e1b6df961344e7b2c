@@ -1,0 +1,59 @@
+package com.proyecto.tienda.controller;
+
+
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.proyecto.tienda.entity.Pedidos;
+import com.proyecto.tienda.service.PedidosService;
+
+@RestController
+@RequestMapping(value = "/pedidos")
+public class PedidoController {
+
+	@Autowired
+	private PedidosService pedidosService;
+	
+	@GetMapping(value = "/obtenerFecha", produces = (MediaType.APPLICATION_JSON_VALUE))
+	public ResponseEntity <?> getFecha() {
+		try {
+			LocalDate response = pedidosService.getFecha();
+			return ResponseEntity.ok("{ \"Fecha\" : \"" + response + "\" }");
+			  
+		}
+		catch(Exception ex) {
+			String mensaje = ex.getMessage();
+			return ResponseEntity.badRequest().body("{ \"Error\" : \"" + mensaje + "\" }");
+		}
+		
+	}
+	
+	@PostMapping(value = "/crearComprobante", consumes = (MediaType.APPLICATION_JSON_VALUE))
+	public ResponseEntity <?> crearComprobante(Pedidos pedido){
+		
+		try {
+			System.out.println("PARM IN PEDIDO "+pedido);
+			LocalDate fecha = pedidosService.getFecha();
+			//pedido.setFecha(fecha);
+			
+			//Pedidos pedidoCreado =pedidosService.crearComprobante(pedido);
+			return ResponseEntity.ok("Pedido creado exitosamente"  +  pedido) ;
+			  
+		}
+		catch(Exception ex) {
+			String mensaje = ex.getMessage();
+			return ResponseEntity.badRequest().body("{ \"AltaPedidoFallo\" : \"" + mensaje + "\" }");
+		}
+		  
+	}
+	
+	
+}

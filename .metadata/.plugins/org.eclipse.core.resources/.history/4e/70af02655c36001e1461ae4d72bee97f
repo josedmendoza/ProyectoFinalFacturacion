@@ -1,0 +1,56 @@
+package com.proyecto.tienda.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.proyecto.tienda.entity.Producto;
+import com.proyecto.tienda.service.ProductoService;
+
+@Controller
+@RequestMapping("/producto")
+public class ProductoController {
+
+	@Autowired
+	private ProductoService productoService;
+	
+	//Metodo para crear un producto
+	@PostMapping (value = "/crearProducto", produces = (MediaType.APPLICATION_JSON_VALUE))
+	public ResponseEntity <?> crearProducto(@RequestBody Producto producto){
+		try {
+			Producto nuevoProducto = productoService.crearProducto(producto);
+			return ResponseEntity.ok("Se agrego el producto correctamente" + nuevoProducto);
+		}catch(Exception e) {
+			return ResponseEntity.badRequest().body("No se pudo agregar el error correctamente" + e.getMessage());
+		}
+	}
+	
+	//Metodo para actualizar producto
+		@PutMapping(value = "/id", consumes = (MediaType.APPLICATION_JSON_VALUE))
+		public ResponseEntity<?> actualizarProducto (@PathVariable long idProducto, @RequestBody Producto producto) {
+			try {
+				Producto actualizadoProducto = productoService.actualizarProducto(idProducto, producto);
+			return ResponseEntity.ok("Se actualizo los datos del producto" + actualizadoProducto);
+			}catch(Exception e) {
+				return ResponseEntity.badRequest().body("No se pudo actualizar el producto" + e.getMessage());
+			}
+		}
+		
+	//Metodo para actualizar producto
+			@PutMapping(value = "/id", consumes = (MediaType.APPLICATION_JSON_VALUE))
+			public ResponseEntity<?> actualizarPrecioProducto (@PathVariable long idProducto, @RequestBody Producto producto) {
+				try {
+					Producto actualizadoPrecioProducto = productoService.actualizarPrecioProducto(idProducto, producto);
+				return ResponseEntity.ok("Se actualizo el precio del producto" + actualizadoPrecioProducto);
+				}catch(Exception e) {
+					return ResponseEntity.badRequest().body("No se pudo actualizar el precio del producto" + e.getMessage());
+					}
+			}
+		
+}
